@@ -4,32 +4,68 @@ import Settings from '../views/Settings.vue'
 import Statistics from '../views/Statistics.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import store from '../store/modules/user'
 
 const routes = [
 	{
 		path: '/',
 		name: 'Home',
-		component: Home
+		component: Home,
+		beforeEnter: (to, from, next) => {
+			if(!window.sessionStorage.getItem('token')) {
+				next('/login');
+			} else {
+				next();
+			}
+		}
 	},
 	{
 		path: '/settings',
 		name: 'Settings',
-		component: Settings
+		component: Settings,
+		beforeEnter: (to, from, next) => {
+			if(!window.sessionStorage.getItem('token')) {
+				next('/login');
+			} else {
+				next();
+			}
+		}
 	},
 	{
 		path: '/statistics',
 		name: 'Statistics',
-		component: Statistics
+		component: Statistics,
+		beforeEnter: (to, from, next) => {
+			if(!window.sessionStorage.getItem('token')) {
+				next('/login');
+			} else {
+				next();
+			}
+		}
 	},
 	{
 		path: '/login',
 		name: 'Login',
-		component: Login
+		component: Login,
+		beforeEnter: (to, from, next) => {
+			if(window.sessionStorage.getItem('token')) {
+				next(from.fullPath);
+			} else {
+				next();
+			}
+		}
 	},
 	{
 		path: '/register',
 		name: 'Register',
-		component: Register
+		component: Register,
+		beforeEnter: (to, from, next) => {
+			if(window.sessionStorage.getItem('token')) {
+				next(from.fullPath);
+			} else {
+				next();
+			}
+		}
 	},
 ]
 

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="bg-red-400">
+		<div class="text-white text-6xl mt-24">
 			Statistics
 		</div>
 	</div>
